@@ -28,7 +28,7 @@ app.get('*', function(req, res){
 
 // const DB = "mongodb://localhost/instaclone";
 
-const port = process.env.PORT || 3005;
+const port = 3005 || process.env.PORT
 
 const server = app.listen(port, () => {
   console.log("Server is up listening on port:" + port);
