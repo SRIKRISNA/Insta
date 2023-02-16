@@ -20,10 +20,10 @@ mongoose.connect(process.env.MONGOKEY, (db)=> {
     console.log(err);
 });
 // static files
-app.use(express.static(path.join(__dirname, './instaclone/build')));
+app.use(express.static(path.join(__dirname, './client/build')));
 
 app.get('*', function(req, res){
-    res.sendFile(path.join(__dirname, './instaclone/build/index.html'))
+    res.sendFile(path.join(__dirname, './client/build/index.html'))
 })
 
 // const DB = "mongodb://localhost/instaclone";
