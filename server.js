@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const app = express();
 
+// hello
 //middleware 
 app.use(express.json({limit: "30mb", extended: true}));
 app.use(cors());
@@ -20,11 +21,27 @@ mongoose.connect(process.env.MONGOKEY, (db)=> {
     console.log(err);
 });
 // static files
-app.use(express.static(path.join(__dirname, './client/build')));
+// app.use(express.static(path.join(__dirname, './client/build')));
 
-app.get('*', function(req, res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'))
-})
+// app.get('*', function(req, res){
+//     res.sendFile(path.join(__dirname, './client/build/index.html'))
+// })
+
+//additional code
+// Your code
+if (process.env.NODE_ENV === "production") {
+    const path = require("path");
+    app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
+            if(err) {
+                res.status(500).send(err)
+            }
+        });
+    })
+}
+// Your code
+
 
 // const DB = "mongodb://localhost/instaclone";
 
